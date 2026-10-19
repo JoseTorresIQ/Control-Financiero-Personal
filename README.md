@@ -96,10 +96,51 @@ python server.py
 
 ---
 
+## ☁️ Cómo Subir a GitHub y Desplegar en Streamlit Cloud
+
+Este proyecto está 100% preparado y optimizado para ser alojado en **GitHub** y desplegado en la nube gratuita de **Streamlit Community Cloud**.
+
+### Paso 1: Crear el Repositorio en GitHub
+1. Ingresa a tu cuenta de GitHub y crea un nuevo repositorio: [https://github.com/new](https://github.com/new).
+2. Asígnale un nombre (por ejemplo: `finanzflow-pwa`).
+3. **Importante:** Deja desmarcadas las casillas *"Add a README file"*, *"Add .gitignore"* y *"Choose a license"* (ya están configuradas en el proyecto local).
+4. Copia la URL de tu repositorio (ejemplo: `https://github.com/tu-usuario/finanzflow-pwa.git`).
+
+### Paso 2: Subir el Proyecto a GitHub
+Puedes hacerlo de dos formas:
+
+#### Opción A (Automática mediante script):
+1. Haz doble clic en el archivo [`subir_a_github.bat`](file:///c:/Users/ADMIN/OneDrive/PYTHON/20261019%20-%20PWA%20CONTROL%20FINANCIERO%20PERSONAL/subir_a_github.bat).
+2. Pega la URL de tu repositorio y presiona Enter.
+
+#### Opción B (Manual por consola):
+Abre una terminal en la carpeta del proyecto y ejecuta:
+```bash
+git remote add origin https://github.com/tu-usuario/finanzflow-pwa.git
+git push -u origin main
+```
+
+---
+
+### Paso 3: Desplegar en Streamlit Community Cloud (Gratis)
+1. Ingresa a **[https://share.streamlit.io/](https://share.streamlit.io/)** e inicia sesión con tu cuenta de GitHub.
+2. Haz clic en el botón azul **"New app"** (o *"Create app"*).
+3. Configura los siguientes campos:
+   - **Repository:** Selecciona tu repositorio (ej. `tu-usuario/finanzflow-pwa`).
+   - **Branch:** `main`
+   - **Main file path:** `streamlit_app.py`
+   - **App URL (opcional):** Puedes personalizar el subdominio (ej. `finanzflow.streamlit.app`).
+4. Haz clic en **"Deploy!"**.
+5. ¡Listo! Streamlit instalará las dependencias de `requirements.txt`, activará el servicio de estáticos configurado en `.streamlit/config.toml` y pondrá en línea tu PWA accesible desde cualquier navegador, smartphone o tablet en el mundo.
+
+---
+
 ## 📁 Estructura del Proyecto
 
 ```text
 20261019 - PWA CONTROL FINANCIERO PERSONAL/
+├── .streamlit/
+│   └── config.toml              # Configuración del servidor Streamlit y enableStaticServing
 ├── css/
 │   └── styles.css               # Diseño Glassmorphism, Login, PIN, Calendario y Calculadoras
 ├── js/
@@ -120,10 +161,21 @@ python server.py
 │   ├── icon-maskable-192.png    # Ícono adaptable Android
 │   ├── icon-maskable-512.png    # Ícono adaptable Android
 │   └── favicon-64.png           # Favicon para navegadores
+├── static/                      # Directorio de recursos estáticos servidos por Streamlit
+│   ├── css/
+│   ├── js/
+│   ├── icons/
+│   ├── index.html
+│   ├── manifest.json
+│   └── sw.js
 ├── index.html                   # Single Page Application (SPA) con Login y vistas integradas
 ├── manifest.json                # Especificación PWA Web App Manifest
 ├── sw.js                        # Service Worker v1.3.0 (Offline-First)
 ├── server.py                    # Servidor local con apertura automática
-├── ejecutar_pwa_finanzas.bat    # Lanzador por lotes
+├── streamlit_app.py             # Entrada principal para despliegue en Streamlit Cloud
+├── requirements.txt             # Dependencias Python para Streamlit
+├── .gitignore                   # Archivos y carpetas ignorados por Git
+├── ejecutar_pwa_finanzas.bat    # Lanzador local por lotes
+├── subir_a_github.bat           # Script asistente para subir a GitHub con un clic
 └── README.md                    # Documentación completa
 ```
