@@ -1,1 +1,3 @@
-streamlit>=1.30.0
+# FinanzFlow PWA - Servidor Nativo Offline-First
+# Este proyecto opera 100% con la Biblioteca Estándar de Python (http.server, socket, webbrowser).
+# No se requiere instalar librerías externas mediante pip.
