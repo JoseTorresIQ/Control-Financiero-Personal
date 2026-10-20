@@ -68,6 +68,13 @@ Desarrollada bajo la filosofía **Offline-First**, garantiza que todos tus datos
 - **Calculadora de Interés Compuesto:**
   - Proyecta el crecimiento de tu dinero a 1, 3, 5, 10 o 20 años con aportes mensuales y rendimiento anual estimado.
 
+### 9. 📱 Experiencia Móvil Mobile-First & PWA Nativa Mejorada
+- **Barra de Navegación Inferior Ergonómica:** Barra fija con soporte para áreas seguras de pantalla (`env(safe-area-inset-bottom)` en iPhone y Android), con accesos rápidos a **Inicio**, **Movs**, **Presupuesto**, **Metas** y **Más**.
+- **Menú Drawer Deslizable ("Más"):** Panel tipo *Bottom Sheet* nativo que despliega con fluidez todas las secciones secundarias: Calendario & Pagos, Cuentas & Bancos, Deudas & Calculadoras, Usuarios (Admin), Ajustes, y atajos rápidos para cambiar tema, modo privacidad o cerrar sesión.
+- **Formularios y Modales Adaptativos:** En smartphones, los diálogos se abren desde la parte inferior como hojas deslizables con botones de acción a tamaño completo para el pulgar.
+- **Prevención de Zoom Forzado en iOS Safari:** Tipografía mínima de 16px en campos de formulario que evita el molesto auto-zoom de Safari al escribir.
+- **Cabecera Móvil Limpia y Botón Flotante (+):** En pantallas pequeñas se oculta el botón de texto superior dejando un Floating Action Button (FAB) flotante sobre la barra de navegación, liberando espacio para el balance y gráficos.
+
 ---
 
 ## 📲 Cómo Instalar la PWA en tus Dispositivos

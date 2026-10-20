@@ -198,6 +198,9 @@ const AuthModule = {
   },
 
   showLoginScreen() {
+    if (typeof App !== 'undefined' && App.closeMobileMenu) {
+      App.closeMobileMenu();
+    }
     const loginScreen = document.getElementById('login-screen');
     const appContainer = document.querySelector('.app-container');
     const bottomNav = document.querySelector('.mobile-bottom-nav');

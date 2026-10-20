@@ -1,6 +1,6 @@
 // Service Worker para FinanzFlow PWA
-// Versión de caché offline-first v1.3.0
-const CACHE_NAME = 'finanzflow-v1.3.0';
+// Versión de caché offline-first v1.4.0 (Mejoras Móvil)
+const CACHE_NAME = 'finanzflow-v1.4.0';
 
 const PRECACHE_ASSETS = [
   './',

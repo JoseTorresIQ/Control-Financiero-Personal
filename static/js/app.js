@@ -101,6 +101,13 @@ const App = {
       this.showToast('Estás en modo sin conexión (Offline). Todos tus datos siguen disponibles.', 'info');
     });
     this.updateOnlineBadge(navigator.onLine);
+
+    // Cerrar menú drawer móvil con tecla Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeMobileMenu();
+      }
+    });
   },
 
   updateOnlineBadge(isOnline) {
@@ -126,6 +133,10 @@ const App = {
     if (icon) {
       icon.innerText = theme === 'dark' ? '☀️' : '🌙';
     }
+    const drawerIcon = document.getElementById('drawer-theme-icon');
+    if (drawerIcon) {
+      drawerIcon.innerText = theme === 'dark' ? '☀️' : '🌙';
+    }
   },
 
   toggleTheme() {
@@ -139,8 +150,52 @@ const App = {
     this.showToast(`Modo ${newTheme === 'dark' ? 'Oscuro' : 'Claro'} activado`, 'info');
   },
 
+  toggleMobileMenu() {
+    const sheet = document.getElementById('mobile-more-sheet');
+    if (!sheet) return;
+    if (sheet.classList.contains('active')) {
+      this.closeMobileMenu();
+    } else {
+      this.openMobileMenu();
+    }
+  },
+
+  openMobileMenu() {
+    const sheet = document.getElementById('mobile-more-sheet');
+    if (!sheet) return;
+
+    const userName = document.getElementById('drawer-user-name');
+    const userRole = document.getElementById('drawer-user-role');
+    if (typeof AuthModule !== 'undefined' && AuthModule.currentUser) {
+      if (userName) userName.textContent = AuthModule.currentUser.name;
+      if (userRole) {
+        userRole.textContent = AuthModule.currentUser.role === 'admin' ? '👑 Administrador General' : '👤 Usuario Individual';
+      }
+    }
+
+    const drawerIcon = document.getElementById('drawer-theme-icon');
+    if (drawerIcon) {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      drawerIcon.innerText = isDark ? '☀️' : '🌙';
+    }
+
+    sheet.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  },
+
+  closeMobileMenu() {
+    const sheet = document.getElementById('mobile-more-sheet');
+    if (sheet) {
+      sheet.classList.remove('active');
+    }
+    document.body.style.overflow = '';
+  },
+
   switchTab(tabName) {
     this.activeTab = tabName;
+
+    // Cerrar menú drawer móvil si estuviera abierto
+    this.closeMobileMenu();
 
     // Actualizar botones de navegación activos
     document.querySelectorAll('[data-tab-target]').forEach(el => {
@@ -150,6 +205,17 @@ const App = {
         el.classList.remove('active');
       }
     });
+
+    // Si la pestaña está contenida en el Drawer "Más", iluminar el botón Más en el bottom nav
+    const moreBtn = document.getElementById('mobile-nav-more-btn');
+    if (moreBtn) {
+      const moreTabs = ['calendar', 'accounts', 'calculators', 'users', 'settings'];
+      if (moreTabs.includes(tabName)) {
+        moreBtn.classList.add('active');
+      } else {
+        moreBtn.classList.remove('active');
+      }
+    }
 
     // Mostrar sección correspondiente
     document.querySelectorAll('.app-view-section').forEach(sec => {

@@ -189,11 +189,14 @@
       <!-- Header Superior -->
       <header class="top-header">
         <div class="header-left">
-          <h1 class="user-welcome-title">
-            Hola, <span id="header-user-name">Usuario</span>
-            <span id="header-user-role-badge" class="status-badge badge-info" style="margin-left: 8px; vertical-align: middle;">👤 Usuario</span>
-          </h1>
-          <span class="user-welcome-sub">Control Financiero Inteligente</span>
+          <div class="header-avatar-circle" id="header-avatar-circle" onclick="App.toggleMobileMenu()">👤</div>
+          <div>
+            <h1 class="user-welcome-title">
+              Hola, <span id="header-user-name">Usuario</span>
+              <span id="header-user-role-badge" class="status-badge badge-info" style="margin-left: 8px; vertical-align: middle;">👤 Usuario</span>
+            </h1>
+            <span class="user-welcome-sub">Control Financiero Inteligente</span>
+          </div>
         </div>
 
         <div class="header-right">
@@ -746,37 +749,107 @@
   <nav class="mobile-bottom-nav" aria-label="Navegación Móvil">
     <ul class="mobile-nav-items">
       <li>
-        <button class="mobile-nav-btn active" data-tab-target="dashboard">
+        <button class="mobile-nav-btn active" data-tab-target="dashboard" id="mobile-nav-dashboard">
           <span class="mobile-nav-icon">📊</span>
-          <span>Inicio</span>
+          <span class="mobile-nav-label">Inicio</span>
         </button>
       </li>
       <li>
-        <button class="mobile-nav-btn" data-tab-target="transactions">
+        <button class="mobile-nav-btn" data-tab-target="transactions" id="mobile-nav-transactions">
           <span class="mobile-nav-icon">💸</span>
-          <span>Movs</span>
+          <span class="mobile-nav-label">Movs</span>
         </button>
       </li>
       <li>
-        <button class="mobile-nav-btn" data-tab-target="calendar">
-          <span class="mobile-nav-icon">📅</span>
-          <span>Agenda</span>
+        <button class="mobile-nav-btn" data-tab-target="budgets" id="mobile-nav-budgets">
+          <span class="mobile-nav-icon">🎯</span>
+          <span class="mobile-nav-label">Presupuesto</span>
         </button>
       </li>
       <li>
-        <button class="mobile-nav-btn admin-only-nav" data-tab-target="users">
-          <span class="mobile-nav-icon">👥</span>
-          <span>Usuarios</span>
+        <button class="mobile-nav-btn" data-tab-target="goals" id="mobile-nav-goals">
+          <span class="mobile-nav-icon">🏆</span>
+          <span class="mobile-nav-label">Metas</span>
         </button>
       </li>
       <li>
-        <button class="mobile-nav-btn" data-tab-target="accounts">
-          <span class="mobile-nav-icon">💳</span>
-          <span>Cuentas</span>
+        <button class="mobile-nav-btn" id="mobile-nav-more-btn" onclick="App.toggleMobileMenu()" aria-label="Más secciones y opciones">
+          <span class="mobile-nav-icon">☰</span>
+          <span class="mobile-nav-label">Más</span>
         </button>
       </li>
     </ul>
   </nav>
+
+  <!-- Mobile Drawer / Menú Bottom Sheet "Más" -->
+  <div id="mobile-more-sheet" class="mobile-drawer-overlay" onclick="if(event.target === this) App.closeMobileMenu();">
+    <div class="mobile-drawer-card">
+      <div class="drawer-drag-handle"></div>
+      <div class="drawer-header">
+        <div class="drawer-user-info">
+          <div class="drawer-user-avatar">👤</div>
+          <div>
+            <h4 class="drawer-user-name" id="drawer-user-name">Usuario</h4>
+            <span class="drawer-user-role" id="drawer-user-role">Modo Personal</span>
+          </div>
+        </div>
+        <button class="btn-icon" onclick="App.closeMobileMenu()" title="Cerrar menú">✕</button>
+      </div>
+
+      <div class="drawer-grid">
+        <button class="drawer-grid-item" data-tab-target="calendar" onclick="App.closeMobileMenu();">
+          <span class="drawer-item-icon">📅</span>
+          <div class="drawer-item-text">
+            <span class="drawer-item-title">Calendario & Pagos</span>
+            <span class="drawer-item-sub">Vencimientos programados</span>
+          </div>
+        </button>
+        <button class="drawer-grid-item" data-tab-target="accounts" onclick="App.closeMobileMenu();">
+          <span class="drawer-item-icon">💳</span>
+          <div class="drawer-item-text">
+            <span class="drawer-item-title">Cuentas & Bancos</span>
+            <span class="drawer-item-sub">Saldos y billeteras</span>
+          </div>
+        </button>
+        <button class="drawer-grid-item" data-tab-target="calculators" onclick="App.closeMobileMenu();">
+          <span class="drawer-item-icon">🧮</span>
+          <div class="drawer-item-text">
+            <span class="drawer-item-title">Deudas & Calculadoras</span>
+            <span class="drawer-item-sub">Bola de nieve e interés compuesto</span>
+          </div>
+        </button>
+        <button class="drawer-grid-item admin-only-nav" data-tab-target="users" onclick="App.closeMobileMenu();">
+          <span class="drawer-item-icon">👥</span>
+          <div class="drawer-item-text">
+            <span class="drawer-item-title">Usuarios del Sistema</span>
+            <span class="drawer-item-sub">Panel de Administración</span>
+          </div>
+        </button>
+        <button class="drawer-grid-item" data-tab-target="settings" onclick="App.closeMobileMenu();">
+          <span class="drawer-item-icon">⚙️</span>
+          <div class="drawer-item-text">
+            <span class="drawer-item-title">Ajustes & Respaldo</span>
+            <span class="drawer-item-sub">PIN, moneda, backup y exportar</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="drawer-footer-actions">
+        <button class="drawer-action-btn" onclick="App.toggleTheme(); App.closeMobileMenu();">
+          <span id="drawer-theme-icon">☀️</span>
+          <span>Tema</span>
+        </button>
+        <button class="drawer-action-btn" onclick="SecurityModule.togglePrivacyMode(); App.closeMobileMenu();">
+          <span>👁️</span>
+          <span>Privacidad</span>
+        </button>
+        <button class="drawer-action-btn btn-danger-soft btn-logout-action" onclick="App.closeMobileMenu();">
+          <span>🚪</span>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Botón Flotante de Acción Rápida (FAB) -->
   <button class="fab-btn" onclick="TransactionsModule.openModal('expense')" title="Registrar Operación" aria-label="Nueva Operación">
