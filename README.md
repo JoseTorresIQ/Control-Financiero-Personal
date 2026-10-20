@@ -113,18 +113,24 @@ Este proyecto está 100% preparado y optimizado para ser alojado en **GitHub** y
 3. **Importante:** Deja desmarcadas las casillas *"Add a README file"*, *"Add .gitignore"* y *"Choose a license"* (ya están configuradas en el proyecto local).
 4. Copia la URL de tu repositorio (ejemplo: `https://github.com/tu-usuario/finanzflow-pwa.git`).
 
-### Paso 2: Subir el Proyecto a GitHub
+### Paso 2: Subir y Actualizar Todos los Archivos en GitHub
 Puedes hacerlo de dos formas:
 
-#### Opción A (Automática mediante script):
-1. Haz doble clic en el archivo [`subir_a_github.bat`](file:///c:/Users/ADMIN/OneDrive/PYTHON/20261019%20-%20PWA%20CONTROL%20FINANCIERO%20PERSONAL/subir_a_github.bat).
-2. Pega la URL de tu repositorio y presiona Enter.
+#### Opción A (Automática con 1 clic mediante script):
+1. Haz doble clic en [`subir_a_github.bat`](file:///c:/Users/ADMIN/OneDrive/PYTHON/20261019%20-%20PWA%20CONTROL%20FINANCIERO%20PERSONAL/subir_a_github.bat) (o desde la raíz: [`subir_pwa_finanzas_github.bat`](file:///c:/Users/ADMIN/OneDrive/PYTHON/subir_pwa_finanzas_github.bat)).
+2. El script automáticamente:
+   - Sincroniza todos los archivos hacia `static/`.
+   - Agrega **todos** los archivos nuevos, modificados o eliminados (`git add -A`).
+   - Confirma los cambios (`git commit`).
+   - Sube todo directamente a la rama `main` de GitHub (`git push origin main`).
 
 #### Opción B (Manual por consola):
 Abre una terminal en la carpeta del proyecto y ejecuta:
 ```bash
-git remote add origin https://github.com/tu-usuario/finanzflow-pwa.git
-git push -u origin main
+python -c "import streamlit_app; streamlit_app.sync_static_assets()"
+git add -A
+git commit -m "Actualizacion de FinanzFlow PWA"
+git push origin main
 ```
 
 ---
